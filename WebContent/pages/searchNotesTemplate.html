@@ -1,0 +1,63 @@
+<div id="change-data-profile-box">
+		<form data-ng-submit="listVM.functions.searchNotes()">
+			<fieldset>
+				<legend>Search Information</legend>
+				<label for="title-search">Title</label>
+				<input data-ng-model="listVM.titleSelected" class="input-modify" id="title-search" name="title-search" placeholder="Title of Note" type="text"> 
+				<fieldset>
+					<legend>User Type</legend>
+					<div class="type-user">
+						<input data-ng-model="listVM.sharedNotesSelected" id="typeuser1" class="input-checkbox" name="typeuser" type="radio" value="0" checked> 
+							<label for="typeuser1" class="user-type-checkbox">Owner</label>
+					</div>
+					<div class="type-user">
+						<input data-ng-model="listVM.sharedNotesSelected" id="typeuser2" class="input-checkbox" name="typeuser" type="radio" value="1"> 
+						<label for="typeuser2">Friends</label>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>Colors</legend>
+					<div class="type-color">
+						<input id="colorblack" class="input-checkbox" type="radio" name="color-searched" value="0" data-ng-model="listVM.colorSelected"> 
+						<label for="colorblack">No Color</label>
+					</div>
+					<div class="type-color">
+						<input id="nocolor" class="input-checkbox" type="radio" name="color-searched" value="4" data-ng-model="listVM.colorSelected"> 
+						<label for="nocolor">Black</label>
+					</div>
+					<div class="type-color">
+						<input id="colorblue" class="input-checkbox" type="radio" name="color-searched" value="2" data-ng-model="listVM.colorSelected"> 
+						<label for="colorblue">Blue</label>
+					</div>
+					<div class="type-color">
+						<input id="colorgreen" class="input-checkbox" type="radio" name="color-searched" value="1" data-ng-model="listVM.colorSelected"> 
+						<label for="colorgreen">Green</label>
+					</div>
+					<div class="type-color">
+						<input id="colorpink" class="input-checkbox" type="radio" name="color-searched" value="3" data-ng-model="listVM.colorSelected"> 
+						<label for="colorpink">Pink</label>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>Note Type</legend>
+					<div class="type-color">
+						<input data-ng-model="listVM.typeSelected" id="pinned" class="input-checkbox" type="radio" name="type-note" value="pinned"> 
+						<label for="pinned">Pinned</label>
+					</div>
+					<div class="type-color">
+						<input data-ng-model="listVM.typeSelected" id="archived" class="input-checkbox" type="radio" name="type-note" value="archived">
+						<label for="archived">Archived</label>
+					</div>
+					<div class="type-color">
+						<input data-ng-model="listVM.typeSelected" id="intrash" class="input-checkbox" type="radio" name="type-note" value="intrash"> 
+						<label for="intrash">In Trash</label>
+					</div>
+					<div class="type-color">
+						<input data-ng-model="listVM.typeSelected" id="dontmatter" class="input-checkbox" type="radio" name="type-note" value="dontmatter"> 
+						<label for="intrash">Don't Matter</label>
+					</div>
+				</fieldset>
+			</fieldset>
+			<input type="submit" value="Search">
+		</form>
+	</div>

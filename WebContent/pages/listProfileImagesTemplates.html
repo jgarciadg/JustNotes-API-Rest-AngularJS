@@ -1,0 +1,8 @@
+<div id="change-content-profile-img">
+		<div id="h2-intro">
+			<h2 class="title">Select an image for your profile</h2>
+		</div>
+		<a data-ng-href="" data-ng-click="profileimagesVM.functions.changeProfileImage(profileimage.idi)" data-ng-repeat="profileimage in profileimagesVM.profileimages">
+			<img class="profile-img" src="{{profileimage.url}}" alt="Profile Image {{profileimage.idi}}">
+		</a>
+</div>

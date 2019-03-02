@@ -1,0 +1,47 @@
+	<div id="content-friends">
+			<div class="content-friend" data-ng-repeat="friendinfo in friendsHandlerVM.friends">
+				<div class="img-friend-content">
+					<img class="img-friend" src="{{friendinfo.profileimage.url}}" alt="Friend Profile Img {{friendinfo.user.idi}}">
+				</div>
+				<div class="info-friend-content">
+					<div class="name-friend">
+						<h2>{{friendinfo.user.username}}</h2>
+					</div>
+					<div class="options-friend">
+						<input class="icon-img"  data-ng-click="friendsHandlerVM.functions.addFriendToShare(friendinfo)" type="checkbox" name="idu" value="${friendtriplet.first.idu}" 
+						data-ng-show="friendsHandlerVM.functions.where('/shareNoteWithFriends')">
+						<input class="icon-img"  data-ng-click="friendsHandlerVM.functions.addFriendToShare(friendinfo)" type="checkbox" name="idu" value="${friendtriplet.first.idu}" 
+						data-ng-show="friendsHandlerVM.functions.where('/seeNotifications')">
+						
+						<form data-ng-submit="friendsHandlerVM.functions.sendNotification(friendinfo.user.idu)">
+							<input class="icon-img" type="image" src="../images/add_friend.png" alt="Submit Form" data-ng-show="friendsHandlerVM.functions.where('/seeSearchedUsers')"/>
+						</form>
+
+						<form data-ng-submit="friendsHandlerVM.functions.removeFriend(friendinfo)">
+							<input type="hidden" name="idfriend" value="${friendtriplet.first.idu}"> 
+							<input class="icon-img" type="image" src="../images/delete_friend.png" alt="Submit Form" data-ng-show="friendsHandlerVM.functions.where('/myFriends')"/>
+						</form>
+					</div>
+					<div class="notes-shared-with">
+						<h3>Notes Shared</h3>
+							<a href="${pageContext.request.contextPath}/notes/MainServlet?filter=onlyone&idn=${note.idn}" data-ng-repeat="noteinfo in friendinfo.notesshared">
+								<div class="note-from-list">
+									<div class="img-note-list">
+										<img class="img-note-list" src="{{noteinfo.note.urlimage}}">
+									</div>
+									<div class="note-title-list">
+										<h2>{{noteinfo.note.title}}</h2>
+									</div>
+								</div>
+							</a>
+					</div>
+				</div>
+			</div>
+		 	<form data-ng-submit="friendsHandlerVM.functions.shareNote()">
+			<input class="options-input-submit" type="submit" value="Share Note" data-ng-show="friendsHandlerVM.functions.where('/shareNoteWithFriends')">
+			</form>
+			<form data-ng-submit="friendsHandlerVM.functions.acceptNotifications()">
+			<input class="options-input-submit" type="submit" value="Accept Requests" data-ng-show="friendsHandlerVM.functions.where('/seeNotifications')">
+			</form>
+			</div>
+	</div>

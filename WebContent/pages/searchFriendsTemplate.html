@@ -1,0 +1,11 @@
+	<div id="change-data-profile-box">
+		<form data-ng-submit="friendsHandlerVM.functions.goToUsersSearched()">
+			<fieldset>
+				<h3 data-ng-repeat="error in friendsHandlerVM.validationMessages">{{error}}</h3>
+				<legend>Search Information</legend>
+				<label for="username-search">Username</label> 
+				<input class="input-modify" id="username-search" name="username-search" data-ng-model="friendsHandlerVM.username" placeholder="Name of User" type="text">
+			</fieldset>
+			<input type="submit" value="Search">
+		</form>
+	</div>

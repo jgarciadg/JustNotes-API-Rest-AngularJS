@@ -1,0 +1,18 @@
+<div class="h2-full">
+		<h1>Are you sure that you want to delete this account?</h1>
+	</div>
+	<div class="content-friend">
+		<div class="img-friend-content">
+			<img class="img-friend" src="{{profileimage.url}}" alt="Friend Profile Img">
+		</div>
+		<div class="info-friend-content">
+			<div class="name-friend">
+				<h2>Username:  {{user.username}}</h2>
+			</div>
+			<label>E-mail: </label>{{user.email}}<br>
+			<div class="options-friend"></div>
+		</div>
+	</div>
+	<form data-ng-submit="userHandlerVM.functions.deleteUser()">
+		<input type="submit" value="Delete Account">
+	</form>

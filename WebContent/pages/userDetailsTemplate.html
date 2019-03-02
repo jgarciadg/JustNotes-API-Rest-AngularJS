@@ -1,0 +1,28 @@
+<div id="modify-background">
+		<a data-ng-href="#!/listProfileImages">
+			<img id="img-profile" src="{{profileimage.url}}" alt="Profile Image">
+		</a>
+	</div>
+
+	<div id="change-data-profile-box">
+		<form data-ng-submit="userHandlerVM.functions.updateUser()">
+			<fieldset>
+				<legend>Login Information</legend>
+				<input type="hidden" id="idi" name="idi" data-ng-model="user.idi">
+				<label for="username">Username</label> 
+				<input class="input-modify" type="text" id="username" name="username" placeholder="Username" data-ng-model="user.username" required> 
+				<label for="email">Email</label>
+				<input class="input-modify" type="email" id="email" name="email" placeholder="Email" data-ng-model="user.email" required> 
+				<label for="password">Password</label> 
+				<input class="input-modify" type="password" id="password" name="password" placeholder="Password" data-ng-model="user.password" required> 
+				<label for="verifiedpassword">Confirm your password</label> 
+				<input class="input-modify" type="password" id="verifiedpassword" name="verifiedpassword" placeholder="Corfirm Password" data-ng-model="user.password" required>
+			</fieldset>
+			<input type="submit" value="Save Changes"><br>
+			<fieldset>
+				<legend>Do you really want to delete your account?</legend>
+				<a href="#!/checkDeleteUser" id="delete-account-button">Delete Account</a>
+			</fieldset>
+
+		</form>
+	</div>

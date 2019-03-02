@@ -1,0 +1,112 @@
+<!DOCTYPE>
+<html id="index" data-ng-app="JustNotesAPIREST">
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>JustNotes</title>
+<link rel="icon" href="../images/Logo.png">
+<link rel="stylesheet" type="text/css" href="../stylesheet/stylesheet5.css">
+<link rel="stylesheet" type="text/css" href="../stylesheet/color-classes.css">
+
+<script src="../js/angular/angular.js"></script>
+<script src="../js/angular/angular-route.js"></script>
+<script src="../js/angular/angular-animate.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script src="../js/factories/usersFactory.js"></script>
+<script src="../js/factories/notesFactory.js"></script>
+<script src="../js/factories/labelsFactory.js"></script>
+<script src="../js/factories/usersnotesFactory.js"></script>
+<script src="../js/factories/profileimagesFactory.js"></script>
+<script src="../js/factories/usersFriendsFactory.js"></script>
+<script src="../js/factories/versionsNoteFactory.js"></script>
+<script src="../js/factories/notificationsFactory.js"></script>
+
+<script src="../js/controllers/headerCtrl.js"></script>
+<script src="../js/controllers/listCtrl.js"></script>
+<script src="../js/controllers/noteHandlerCtrl.js"></script>
+<script src="../js/controllers/userHandlerCtrl.js"></script>
+<script src="../js/controllers/profileimagesCtrl.js"></script>
+<script src="../js/controllers/friendsHandlerCtrl.js"></script>
+
+<script src="../js/filters/filterArchived.js"></script>
+<script src="../js/filters/filterInTrash.js"></script>
+<script src="../js/filters/filterOwner.js"></script>
+<script src="../js/filters/filterPinned.js"></script>
+<script src="../js/filters/filterShared.js"></script>
+<script src="../js/filters/filterDefault.js"></script>
+<script src="../js/filters/filterAll.js"></script>
+
+
+</head>
+<body data-ng-controller="headerCtrl as headerVM">
+	<header>
+		<div id="contain-header">
+			<div id="left-header">
+				<a href="#!/">
+					<h1>JustNotes</h1>
+				</a>
+			</div>
+			
+			
+			<div id="center-header">
+				<form data-ng-submit="headerVM.functions.getAllBySearch()">
+					<input id="input-search" type="text" name="search-object" placeholder="Search Your Note" data-ng-model="headerVM.textToSearch">
+					<input id="search-submit" type="submit" value="Search">
+				</form>
+			</div>
+			
+			
+			<div id="right-header">
+				<a href="#!/seeNotifications">
+					<div class="header-right-link">
+						<img id="notification-icon" src="../images/notification-icon-ocup.png" alt="Profile Image" data-ng-if="headerVM.notifications.length != 0">
+						<img id="notification-icon" src="../images/notification-icon.png" alt="Profile Image" data-ng-if="headerVM.notifications.length == 0">
+					</div>
+				</a>
+				<a href="#!/editUserDetails">
+					<div class="header-right-link">
+						<img id="profile-img-header" src="{{profileimage.url}}" alt="Profile Image"> {{user.username}}
+					</div>
+				</a>
+			</div>
+			<div id="container-logout-icon">
+				<a href="../notes/LogoutServlet">
+					<img id="logouticon" src="https://png.icons8.com/metro/50/000000/shutdown.png">
+				</a>
+			</div>
+		</div>
+	</header>
+	<nav id="links">
+		<ul>
+			<li>Notes
+				<div class="dropdown-content">
+					<a data-ng-href="#!/seeAll">All Notes</a> 
+					<a data-ng-href="#!/seeMyNotes">My Notes</a> 
+					<a data-ng-href="#!/seePinned">Pinned</a>
+					<a data-ng-href="#!/seeShared">Shared With Me</a> 
+					<a data-ng-href="#!/seeArchived">Archived</a>
+					<a data-ng-href="#!/seeInTrash">In Trash</a>
+				</div>
+			</li>
+			<li>Friends
+				<div class="dropdown-content">
+					<a data-ng-href="#!/myFriends">My Friends</a> 
+				</div>
+			</li>
+			<li>Advanced Search
+				<div class="dropdown-content">
+					<a href="#!/searchNotes">Notes</a>
+					<a href="#!/searchUsers">Users</a>
+				</div>
+			</li>
+			<li data-ng-show="headerVM.functions.where('/seeInTrash')"><a href="#!/checkDeleteNotes">Empty Trash</a></li> 
+		</ul>
+
+		<a id="new-note-button" href="#!/createNote">New Note</a>
+	</nav>
+	<div data-ng-view=""></div>
+</body>
+</html>

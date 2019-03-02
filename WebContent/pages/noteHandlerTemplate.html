@@ -1,0 +1,25 @@
+<div id="change-data-profile-box">
+		<form id="edit-form" data-ng-submit="noteHandlerVM.functions.noteHandlerSwitcher()">
+			<fieldset>
+				<legend>Note Information</legend>
+				<h3 data-ng-repeat="error in noteHandlerVM.validationMessages">{{error}}</h3>
+				<input type="hidden" name="idn" id="idn" data-ng-model="noteHandlerVM.noteinfo.note.idn">
+				<label for="title-note"></label> 
+				<input class="input-modify" type="text" id="title-note" name="title-note" placeholder="Title for your Note" data-ng-model="noteHandlerVM.noteinfo.note.title" required> 
+				<label for="description">Description</label>
+				<textarea class="input-modify" type="textarea" rows="8" id="description" name="description" data-ng-model="noteHandlerVM.noteinfo.note.content" required></textarea>
+
+				<input class="input-modify" type="textarea" rows="8" id="labels" name="labels" 
+				placeholder="Please, write your labels with a colon and without spaces. I.E. example,for,list" data-ng-model="noteHandlerVM.noteinfo.labelsinaline">
+
+				<label for="note-img">Image</label> 
+				<input class="input-modify" type="text" id="note-img" name="url-image" placeholder="Url of your image" data-ng-model="noteHandlerVM.noteinfo.note.urlimage"> 
+				
+				<label for="color">Select a color for your note</label> 
+				<select name="color"  data-ng-model="noteHandlerVM.noteinfo.usernote.color" data-ng-options="color.id as color.name for color in noteHandlerVM.colors" required></select>
+			</fieldset>
+
+			<input id="bottomSubmit" type="submit" value="Create Note" data-ng-show="noteHandlerVM.functions.where('/createNote')">
+			<input id="bottomSubmit" type="submit" value="Update Note" data-ng-show="noteHandlerVM.functions.where('/editNote/'+noteHandlerVM.noteinfo.note.idn)">
+	</form>
+</div>

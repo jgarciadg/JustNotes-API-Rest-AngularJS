@@ -1,0 +1,105 @@
+<div id="filter-data">
+		<form action="${pageContext.request.contextPath}/notes/FilterDataServlet" method="GET">
+			<fieldset>
+				<legend>Colors</legend>
+					<div class="checkbox-filter-data label-content" data-ng-repeat="color in listVM.colorKeyValue">
+						<label> 
+						<input class="input-checkbox" type="radio" name="color" value="color.value" data-ng-click="listVM.functions.filterColor(color.value)">
+						{{color.key}} {{listVM.howMany[$index]}}
+						</label>
+					</div>
+					<label> 
+					<input class="input-checkbox" type="radio" name="color" value="color.value" data-ng-click="listVM.functions.filterColor(-1)" checked>
+						Don't Matter 
+					</label>
+			</fieldset>
+
+			<fieldset>
+				<legend>Labels</legend>
+					<div class="checkbox-filter-data label-content" data-ng-repeat="label in listVM.labels">
+						<input class="input-checkbox" type="radio" name="labels" value="label.content" data-ng-click="listVM.functions.filterLabels(label.content)"> 
+						<label>{{label.content}} {{label.howmany}}</label>
+					</div>
+					<label> 
+					<input class="input-checkbox" type="radio" name="labels" value="" data-ng-click="listVM.functions.filterLabels(-1)" checked>
+						Don't Matter 
+				</label>
+			</fieldset>
+			
+		</form>
+	</div>
+
+	<div id="content-notes-list">
+		<div class="note-from-list class-{{noteinfo.usernote.color}}" data-ng-repeat="noteinfo in listVM.notesinfo | orderBy: ['-usernote.pinned', '-usernote.idn']" >		
+			<a href="#note{{noteinfo.note.idn}}">
+				<div class="img-note-list">
+					<img class="img-note-list" src="{{noteinfo.note.urlimage}}">
+				</div>
+				<div class="note-title-list">
+					<h2>{{noteinfo.note.title}}</h2>
+				</div>
+			</a>
+		</div>
+	</div>
+
+	<div id="content-notes">
+			<div id="note{{noteinfo.note.idn}}" class="note class-{{noteinfo.usernote.color}}" data-ng-repeat="noteinfo in listVM.notesinfo | orderBy: ['-usernote.pinned', '-usernote.idn']">
+				<div class="note-up">
+					<div class="img-note">
+						<img class="img-options" src="{{noteinfo.note.urlimage}}">
+					</div>
+					<div class="note-title">
+						<h2>{{noteinfo.note.title}}</h2>
+					</div>
+					<div class="box-options">
+						<img class="img-options" src="../images/box-options.png">
+						<div class="dropdown-content">
+							<a href="#!/editNote/{{noteinfo.note.idn}}" data-ng-if="!listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)">Edit</a>
+							<a href="#!/shareNoteWithFriends/{{noteinfo.note.idn}}" data-ng-if="!listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)">Share</a>
+							
+								<form data-ng-submit="listVM.functions.pinNote(noteinfo)">
+									<input class="options-input-submit" type="submit" value="{{noteinfo.usernote.pinned == 1 ? 'UnPin' : 'Pin'}}" data-ng-if="!listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)">
+								</form>
+
+								<form data-ng-submit="listVM.functions.archiveNote(noteinfo)">
+									<input class="options-input-submit" type="submit" value="{{noteinfo.usernote.archived == 1 ? 'DisArchive' : 'Archive'}}" data-ng-if="!listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)">
+								</form>
+								
+								<form data-ng-submit="listVM.functions.toTrashNote(noteinfo)" data-ng-if="noteinfo.usernote.intrash == 0 && !listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)" >
+									<input class="options-input-submit" type="submit" value="Delete">
+								</form>
+								
+								<form data-ng-submit="listVM.functions.toTrashNote(noteinfo)" data-ng-if="noteinfo.usernote.intrash == 1">
+									<input class="options-input-submit" type="submit" value="Recover">
+								</form>
+								
+								<form data-ng-submit="listVM.functions.checkDeleteNote(noteinfo)" data-ng-if="noteinfo.usernote.intrash == 1" >
+									<input class="options-input-submit" type="submit" value="Delete">
+								</form>
+								
+								<form data-ng-submit="listVM.functions.recoverVersion(noteinfo)" data-ng-if="listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)">
+									<input class="options-input-submit" type="submit" value="Recover Version">
+								</form>
+							
+							<a href="#!/seeVersions/{{noteinfo.usernote.idn}}" data-ng-if="!listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)">Versions</a>
+						</div>
+					</div>
+				</div>
+				<div class="note-description">
+					<p>{{noteinfo.note.content}}</p>
+				</div>
+				<div class="labels" data-ng-if="!listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)">
+						<span data-ng-repeat="label in noteinfo.labels">{{label.content}}, </span>
+				</div>
+				<div class="labels" data-ng-if="listVM.functions.where('/seeVersions/'+noteinfo.usernote.idn)">
+						<span>{{noteinfo.version.timestamp}} {{noteinfo.user.username}}</span>
+				</div>
+				<div class="icons">
+					<img alt="Empty Icon" src="../images/empty.png" data-ng-if="noteinfo.usernote.owner == 0">
+					<img alt="Owner Icon" src="../images/owner.png" data-ng-if="noteinfo.usernote.owner == 1">
+					<img alt="Pinned Icon" src="../images/pinned.png" data-ng-if="noteinfo.usernote.pinned == 1">
+					<img alt="Archived Icon" src="../images/archived.png" data-ng-if="noteinfo.usernote.archived == 1">
+					<img alt="Trash Icon" src="../images/trash.png" data-ng-if="noteinfo.usernote.intrash == 1">
+				</div>
+			</div>
+	</div>

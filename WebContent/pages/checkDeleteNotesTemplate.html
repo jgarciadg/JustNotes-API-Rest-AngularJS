@@ -1,0 +1,23 @@
+<div class="h2-full">
+		<h1>Are you sure that you want to delete this note?</h1>
+	</div>
+	<div id="content-notes">
+			<div id="note{{noteinfo.note.idn}}" class="note class-{{noteinfo.usernote.color}}" data-ng-repeat="noteinfo in listVM.notesinfo | orderBy: ['-usernote.pinned', '-usernote.idn']" >
+				<div class="note-up">
+					<div class="img-note">
+						<img class="img-options"
+							src="{{noteinfo.note.urlimage}}">
+					</div>
+					<div class="note-title">
+						<h2>{{noteinfo.note.title}}</h2>
+					</div>
+				</div>
+				<div class="note-description">
+					<p>{{noteinfo.note.content}}</p>
+				</div>
+				<div class="labels"><span data-ng-repeat="label in noteinfo.labels">{{label.content}}, </span></div>
+			</div>
+	</div>
+	<form data-ng-submit="listVM.functions.emptyTrash()" >
+		<input type="submit" value="Delete">
+	</form>
